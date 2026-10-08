@@ -1,0 +1,23 @@
+.{
+    .name = .yuzu,
+    .version = "0.1.0",
+    .fingerprint = 0x90f68e7eb5ccd12b,
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{
+        .zigzag = .{
+            .url = "git+https://github.com/meszmate/zigzag?ref=v0.1.6#0a09aa484719a5257cb87dd0f09b4f7e81adcd5b",
+            .hash = "zigzag-0.1.6-YXwYS7UBEwAOOl0w7ju033G2mqu034VzFPp3eMoQJukY",
+        },
+        // RandomX v2 (x86-64 JIT).
+        .randomx = .{
+            .url = "git+https://github.com/NateBrune/zig-randomx#88669cf17b75ea03acea2111599d1e6ef0a48ce9",
+            .hash = "randomx-0.1.0-XtpUqT2LAQBlR4qMYM0-_XnO4PKYh1tn1SHp-Lygb5q3",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "README.md",
+    },
+}
