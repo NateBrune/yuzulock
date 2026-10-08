@@ -11,6 +11,11 @@ yuzu taxes.pdf.yuzu                # same, with plain text progress
 yuzu                               # interactive TUI
 ```
 
+<p>
+  <img src="docs/tui-lock-setup.png" alt="The yuzu TUI in Lock mode: file test.txt, lock for 5m, automatic thread count, memory estimates and a huge pages warning" width="49%">
+  <img src="docs/tui-locking.png" alt="yuzu locking test.txt: 16% done, 85 steps per second, 4m 13s remaining, with per-chain progress" width="49%">
+</p>
+
 ## Build
 
 Requires Zig 0.16 (`sudo dnf install zig` on Fedora), and an x86-64 CPU
