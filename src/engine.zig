@@ -8,7 +8,7 @@ const util = @import("util.zig");
 const selftest = @import("selftest.zig");
 const lockstate = @import("lockstate.zig");
 
-pub const max_lanes = 64;
+pub const max_lanes = puzzle.max_chains;
 const bench_ns: i96 = 3 * std.time.ns_per_s;
 const bench_min_steps = 20;
 /// Headroom left free on top of RandomX's own memory.
@@ -419,7 +419,7 @@ fn lockImpl(gpa: std.mem.Allocator, io: Io, o: LockOptions, st: *Status) !void {
     st.total_steps = iterations * chains;
     st.rate_millis = ls.rate_millis;
     st.done_steps.store(st.resumed_steps, .monotonic);
-    for (ls.chains, 0..) |c, j| if (j < max_lanes) st.lane_done[j].store(c.index, .monotonic);
+    for (ls.chains, 0..) |c, j| st.lane_done[j].store(c.index, .monotonic);
     st.setPhase(.hashing);
 
     // Threads take chains from a queue, so a resumed lock can use fewer
@@ -581,7 +581,7 @@ fn poolWorker(pool: *Pool, err_out: *?anyerror) void {
             if (st.cancel.load(.monotonic)) return;
             s.step(&x, j, i);
             pool.lanes[j].set(i + 1, x);
-            if (j < max_lanes) st.lane_done[j].store(i + 1, .monotonic);
+            st.lane_done[j].store(i + 1, .monotonic);
             _ = st.done_steps.fetchAdd(1, .monotonic);
         }
     }

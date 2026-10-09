@@ -456,7 +456,7 @@ pub const Model = struct {
         const t = std.mem.trim(u8, self.threads.getValue(), " ");
         if (t.len > 0) {
             opts.threads = std.fmt.parseInt(u32, t, 10) catch return self.fail("Threads must be a number.");
-            if (opts.threads == 0 or opts.threads > engine.max_lanes) return self.fail("Threads must be 1–64.");
+            if (opts.threads == 0 or opts.threads > engine.max_lanes) return self.fail(std.fmt.comptimePrint("Threads must be 1–{d}.", .{engine.max_lanes}));
         }
         return .{ .lock = opts };
     }
